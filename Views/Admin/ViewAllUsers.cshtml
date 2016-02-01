@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+}
+@using BCSF12A502.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Panel</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/External/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/External/sb-admin.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/Admin/Index" style="color: #dbc3a3">Admin Panel</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li>
+                    <a href="/Home/Index" style="color: #dbc3a3"><i class="fa fa-fw fa-power-off" style="color: #be2323"></i> Logout</a>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="/Admin/Index" style="color: #d0b796"><i class="fa fa-fw fa-pencil-square"></i> Add New Item</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/DeleteItem" style="color: #d0b796; "><i class="fa fa-fw fa-folder-open"></i> View Gallery</a>
+                    </li>
+                   
+                    <li class="active">
+                        <a href="/Admin/ViewAllUsers" style="color: #d0b796"><i class="fa fa-fw fa-users" ></i> View All Users</a>
+                    </li>
+                    <li>
+                        <a href="/Admin/Messages" style="color: #d0b796"><i class="fa fa-fw fa-envelope" ></i> Messages</a>
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper" style="background-color: #dbc3a3">
+            <div class="container-fluid" style="background-color: #dbc3a3">
+                <!-- Page Heading -->
+                <div class="row" style="background-color: #dbc3a3">
+                    <div class="col-lg-12">
+                        <h2 class="page-header" style="font-family: 'Monotype Corsiva'; margin-left: 50px; color: #42190c">
+                            View All Users
+                        </h2>
+
+                    </div>
+                </div>
+                <div class="row" style="text-align: left; color: #42190c" >
+                    <div class="col-sm-6 col-sm-offset-1 ">
+
+                        @foreach (var i in @Model)
+                        {
+                           
+                            if (i.Email.ToString() != "admin@gmail.com")
+                            {
+                            <br />
+                            <form class="rcorners" action="/Admin/BlockUser" method="post" style="border: solid; border-color: #d1bb9d; width: 400px">
+
+                                <table border='0'>
+                                    <tr>
+                                        <td width="300px">
+                                            <label style="margin-top: 5px; margin-left: 30px; margin-right: 100px; color: #42190c;">
+
+                                                
+                                                         @i.FirstName
+                                                        @i.LastName
+                                                        <br>
+                                                        @i.Email 
+                                                
+                                               
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="Id" value="@i.Id" />
+                                            <div style="text-align:center">
+                                                <button type="submit" class="btn btn-danger" style=" margin-bottom: 5px; margin-left: 10px; margin-top: 5px; height: 30px; width: 70px; "><small>Block</small></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                 </table>
+
+                            </form>
+                                  }
+                                                    
+                                             
+                        }
+                        <br />
+                        <br />
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+    </div>
+
+    </div>
+    <!-- jQuery -->
+    <script src="~/Scripts/External/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/External/bootstrap.min.js"></script>
+
+</body>
+</html>

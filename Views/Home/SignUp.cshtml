@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "SignUp";
+}
+@model BCSF12A502.Models.User
+@using BCSF12A502.Models
+@using System.Web.Optimization
+<!Doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        .rcorners {
+            border-radius: 25px;
+            border: 2px solid #000000;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: gainsboro">
+
+    <div class="row" style="text-align:center">
+        <div class="col-sm-6 col-sm-offset-3 ">
+
+            <h3 style="font-family: 'Monotype Corsiva'; margin-top: 10px; margin-bottom: 10px; text-align: center; color: #1f0d07;"><span class="glyphicon glyphicon-user" style=" color: #1f0d07;"></span> Sign Up</h3>
+
+            <form class="rcorners" action="/Home/AddUser" method="post" onclick="validate">
+                <input type="text" placeholder="First Name" name="FirstName" required style="height:30px ; width:300px ;font-size:small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px" />
+                <br />
+                <br />
+                <input type="text" placeholder="Last Name" name="LastName" style="height:30px ; width:300px ;font-size:small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+                <br />
+                <br />
+                <input type="email" placeholder="Email" name="Email" id="Email" style="height: 30px; margin-left: 70px; width:300px; font-size: small; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+ 
+                <input type="button" class="btn btn-warning" id="b1" value="Check" style="width:60px;height:30px;font-size:13px;margin-left:10px" />
+                    <div id="result" style="height: 20px; text-align: right; font-size: 15px; color:crimson; margin-right: 150px;  "></div>
+                @Scripts.Render("~/bundles/jquery")
+                <script>
+
+                    $(document).ready(function () {
+
+                        $('#checking').hide();
+
+                        $('#b1').click(function () {
+
+                            var email = $('#Email').val();
+                            if(ValidateEmail(email))
+                            {
+                                $('#checking').show();
+                                $.getJSON("/Home/CheckEmail?Email=" + email, function (data) {
+                                    $('#checking').hide();
+                                    if (data) {
+                                        $('#result').text("NOT AVAILABLE!!!");
+                                    }
+                                    else {
+                                        $('#result').text("AVAILABLE!!!");
+                                    
+                                    }
+                                });
+                            }
+                            else{
+                                $('#result').text("Invalid Email Format!!!");
+                            }
+
+                            
+
+                        });
+
+
+                    });
+
+                    function ValidateEmail(uemail) {
+                        var mailformat = /^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                        if (uemail.match(mailformat)) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+
+                    
+                </script>
+
+                <input type="password" placeholder="Password" name="Password" style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+                <br />
+                <br />
+                <input type="text" placeholder="Contact" name="Contact" style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+                <br />
+                <br />
+                <input type="text" placeholder="Address" name="Address" style="height:30px ; width:300px ;font-size:small ; border-radius: 25px; border: 2px solid #D3D3D3; padding: 20px;" required />
+                <br />
+                <br />
+                <button type="submit" class="btn btn-primary" style="height:40px ; width:300px">Sign Up</button>
+
+            </form>
+
+
+        </div>
+    </div>
+</body>
+</html>

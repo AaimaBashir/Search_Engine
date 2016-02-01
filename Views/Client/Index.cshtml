@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+@using BCSF12A502.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Gallery</title>
+    <link href="~/Content/External/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/External/sb-admin.css" rel="stylesheet">
+    <link href="~/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="margin-top:-2px">
+
+    <h2 style="font-family: 'Monotype Corsiva'; margin-left: 70px; color: #2e0e04;font-size:40px; margin-top:-10px">
+        Gallery
+    </h2>
+
+    <div class="row" style="text-align: left; color: #311208">
+        <div class="col-sm-6 col-sm-offset-2 ">
+            <img src="~/Image/divi1.png" style=" margin-bottom: 15px;margin-top:-50px; margin-left:-230px;width:1345px" />
+            @foreach (var i in @Model)
+            {
+                DateTime DT;// = DateTime.ParseExact(i.LastDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime.TryParse(i.LastDate, out DT);
+                var val = String.Format("{0:MM-dd-yyyy}", DT);          // "03/09/2008"
+                if (DT.Date >= DateTime.Today.Date)
+                { 
+                    <br />
+                    <form class="rcorners" action="/Client/bidItem" method="post" onsubmit="return formValidation('b+@i.Id','p+@i.Id');" style=" border-color: #dbc2a2; width: 700px;margin-left:20px;">
+
+                        <table border='0'>
+                            <tr>
+                                <td>
+                                    <br>
+                                    <br>
+                                    <label style="margin-top: 5px; margin-left: 15px; color:#300f04;">
+                                        Title:<i> @i.Name </i>
+                                        <br />
+                                        Last Bidding Date:<i> @val</i>
+                                        <br />
+                                        Top Bidder:<i> @i.TopBidder</i>
+                                                    <br />
+                                                    Lowest Bid Amount:<i> @i.LowestPrice</i>
+                                                    <br />
+                                                </label>
+                                                <br>
+
+                                                <input type="text" placeholder="Bid Amount" name="BidAmount" id="b+@i.Id" required style="height: 30px; background-color: #fbe6b4; width: 200px; font-size: medium; border-radius: 25px; border: 1px solid #392005; padding: 20px; margin-left: 5px;" onchange="clearField('b+@i.Id', 'p+@i.Id')" />
+                                                <div id="p+@i.Id" style="height: 20px; text-align: left; font-size: 18px; color: #e41111; margin-left: 40px; "></div>
+                                                <input type="hidden" name="Id" value="@i.Id" />
+                                                <div style="text-align:left">
+                                                    <button type="submit" class="btn btn-success" style="margin-bottom: 6px; background-color: #12C391; margin-top: -95px; margin-left: 230px; height: 35px; width: 70px; margin-right: 50px; color: #4A1207; "><b>Bid!</b></button>
+                                                </div>
+                                            </td>
+                                            <td><img src="/Paintings/@i.Image" height="220" style="margin-left: 45px;" /></td>
+
+                                        </tr>
+                                    </table>
+
+                                </form>
+                }
+            }
+            <img src="~/Image/divi.png" style=" margin-bottom: -75px;margin-top:5px; margin-left:-230px;width:1345px" />
+            <br />
+            <br />
+
+            <script>
+
+                function formValidation(f, g) {
+                    var price = document.getElementById(f);
+                    if (validPrice(price, g)) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                function clearField(f, g) {
+                    var price = document.getElementById(f);
+                    if (price.value == 0)
+                        document.getElementById(g).textContent = "";
+
+                }
+
+                function allNumbers(num) {
+                    var numbers = /^[0-9]+$/;
+                    if (num.match(numbers)) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+
+                function validPrice(price, div) {
+                    var val = price.value;
+                    if (val < 0 || !allNumbers(val)) {
+                        document.getElementById(div).textContent = "Invalid Amount!!!";
+                        return false;
+                    }
+                    else {
+                        document.getElementById(div).textContent = "";
+                        return true;
+                    }
+
+                }
+                
+            </script>
+
+        </div>
+
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="~/Scripts/External/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/External/bootstrap.min.js"></script>
+
+</body>
+
+</html>

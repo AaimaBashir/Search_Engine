@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background: url(../Image/back1.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #dbc3a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="container">
+
+            <div>
+                <h1 style="font-family: 'Monotype Corsiva'; color: #1f0d07; margin-bottom:-20px">A4AAA</h1>
+                <h3 style="font-family: 'Monotype Corsiva'; color: #28110a; margin-bottom: -10px">
+                    Auction for Anyone, Anytime, Anywhere
+                </h3>
+                <img src="~/Image/anigavel.gif" style="margin-left: 1080px; margin-top: -90px; margin-bottom: -30px; width:140px; height: 80px; " />
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav " style="margin-left:15px">
+
+                <li role="presentation"><a href="/Client/Index" style="font-family: Calibri; font-size: medium; color: #dbc3a3;">Gallery</a></li>
+                <li role="presentation"><a href="/Client/About" style="font-family: Calibri; font-size: medium; color: #dbc3a3;">About</a></li>
+                <li role="presentation"><a href="/Client/ContactUs" style="font-family: Calibri; font-size: medium; color: #dbc3a3;">Contact Us</a></li>
+               
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:25px">
+                <li><a href="/Home/Login" style="font-family: Calibri; font-size: medium; color: #dbc3a3;"><span class="glyphicon glyphicon-log-out" style="color: #be2323"></span> Logout</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+
+
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+
+
+
+    <img src="~/Image/thanks1.png" style="margin-left: 940px; margin-bottom: 1px; margin-top: 20px; height: 70px;  " />
+    <div style="margin-top: -50px; color: #391a10; text-align: left; text-shadow: initial; margin-left: 20px; font: bold; font-family: 'Harlow Solid'; font-style: italic; font-size: 30px; ">
+        <div style="font-family:'Comic Sans MS'; font-size:15px; margin-left:10px">
+            <b> &copy;  2016 A4AAA<br> All Rights Reserved. </b>
+        </div>
+
+    </div>
+
+
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>
